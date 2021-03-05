@@ -1,4 +1,4 @@
-/**************************************************************************//**
+/***********************************************************************************************//**
  * \file cy8ckit_028_epd.h
  *
  * Description: This file is the top level interface for the CY8CKIT-028-EPD
@@ -8,9 +8,9 @@
  * documents available at the following website:
  * https://www.pervasivedisplays.com/product/2-71-e-ink-display/
  *
- *******************************************************************************
+ ***************************************************************************************************
  * \copyright
- * Copyright 2018-2020 Cypress Semiconductor Corporation
+ * Copyright 2018-2021 Cypress Semiconductor Corporation
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **************************************************************************************************/
 
 #pragma once
 
@@ -47,15 +47,18 @@
  *
  * \addtogroup group_board_libs_motion
  * \{
- * The motion sensor is handled by the sensor-motion-bmi160 library, details are available at https://github.com/cypresssemiconductorco/sensor-motion-bmi160.
+ * The motion sensor is handled by the sensor-motion-bmi160 library, details are available at
+ * https://github.com/cypresssemiconductorco/sensor-motion-bmi160.
  * \}
  * \addtogroup group_board_libs_temp
  * \{
- * The temperature sensor is handled by the thermistor library, details are available at https://github.com/cypresssemiconductorco/thermistor.
+ * The temperature sensor is handled by the thermistor library, details are available at
+ * https://github.com/cypresssemiconductorco/thermistor.
  * \}
  * \addtogroup group_board_libs_display
  * \{
- * The display is handled by the display-eink-e2271cs021 library, details are available at https://github.com/cypresssemiconductorco/display-eink-e2271cs021.
+ * The display is handled by the display-eink-e2271cs021 library, details are available at
+ * https://github.com/cypresssemiconductorco/display-eink-e2271cs021.
  * \}
  */
 
@@ -89,9 +92,9 @@ extern "C"
  * If NULL, the PDM object will not be initialized.
  * @return CY_RSLT_SUCCESS if properly initialized, else an error indicating what went wrong.
  */
-cy_rslt_t cy8ckit_028_epd_init(cyhal_i2c_t *i2c_inst, cyhal_spi_t *spi_inst, cyhal_adc_t *adc_inst,
-                               cyhal_pdm_pcm_cfg_t *pdm_pcm_cfg,
-                               cyhal_clock_t *audio_clock_inst);
+cy_rslt_t cy8ckit_028_epd_init(cyhal_i2c_t* i2c_inst, cyhal_spi_t* spi_inst, cyhal_adc_t* adc_inst,
+                               cyhal_pdm_pcm_cfg_t* pdm_pcm_cfg,
+                               cyhal_clock_t* audio_clock_inst);
 // For more information about the pdm_pcm_cfg and audio_clock_inst parameters,
 // see ../common/microphone_spk0838ht4hb.h
 
@@ -99,13 +102,13 @@ cy_rslt_t cy8ckit_028_epd_init(cyhal_i2c_t *i2c_inst, cyhal_spi_t *spi_inst, cyh
  * Gives the user access to the thermistor object
  * @return A reference to the thermistor object on this shield.
  */
-mtb_thermistor_ntc_gpio_t *cy8ckit_028_epd_get_thermistor(void);
+mtb_thermistor_ntc_gpio_t* cy8ckit_028_epd_get_thermistor(void);
 
 /**
  * Gives the user access to the thermistor config object
  * @return A reference to the thermistor configuration.
  */
-mtb_thermistor_ntc_gpio_cfg_t *cy8ckit_028_epd_get_thermistor_cfg(void);
+mtb_thermistor_ntc_gpio_cfg_t* cy8ckit_028_epd_get_thermistor_cfg(void);
 
 /**
  * Gives the user access to the motion sensor object
@@ -119,7 +122,7 @@ mtb_bmi160_t* cy8ckit_028_epd_get_motion_sensor(void);
  * by the display driver's PV_EINK_IMAGE_SIZE variable.
  * @return A reference to the previous display frame.
  */
-uint8_t *cy8ckit_028_epd_get_previous_frame(void);
+uint8_t* cy8ckit_028_epd_get_previous_frame(void);
 
 /**
  * Gives the user access to a buffer that is allocated by the shield library
@@ -130,7 +133,7 @@ uint8_t *cy8ckit_028_epd_get_previous_frame(void);
  * PV_EINK_IMAGE_SIZE variable.
  * @return A reference to the current display frame.
  */
-uint8_t *cy8ckit_028_epd_get_current_frame(void);
+uint8_t* cy8ckit_028_epd_get_current_frame(void);
 
 /**
  * Gives the user access to the PDM object used with the microphone

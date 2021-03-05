@@ -1,4 +1,4 @@
-/**************************************************************************//**
+/***********************************************************************************************//**
  * \file cy8ckit_028_epd_pins.h
  *
  * Description: This file contains the pin definitions and NCP18XH103F03RB
@@ -8,9 +8,9 @@
  * documents available at the following website:
  * https://www.pervasivedisplays.com/product/2-71-e-ink-display/
  *
- *******************************************************************************
+ ***************************************************************************************************
  * \copyright
- * Copyright 2018-2020 Cypress Semiconductor Corporation
+ * Copyright 2018-2021 Cypress Semiconductor Corporation
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ **************************************************************************************************/
 
 #pragma once
 
@@ -36,12 +36,12 @@ extern "C"
 #endif
 
 /**
-* \addtogroup group_board_libs_pins Pins
-* \{
-* Pin mapping of the GPIOs used by shield peripherals
-*/
+ * \addtogroup group_board_libs_pins Pins
+ * \{
+ * Pin mapping of the GPIOs used by shield peripherals
+ */
 
-/* E-Ink display */
+// E-Ink display
 /** Pin for the E-Ink SPI MOSI signal */
 #define CY8CKIT_028_EPD_PIN_DISPLAY_SPI_MOSI    (CYBSP_D11)
 /** Pin for the E-Ink SPI MISO signal */
@@ -64,7 +64,7 @@ extern "C"
 /** Pin for the E-Ink Display IO Enable signal */
 #define CY8CKIT_028_EPD_PIN_DISPLAY_IOEN        (CYBSP_D7)
 
-/* Thermistor */
+// Thermistor
 /** Pin for the Thermistor VDD signal */
 #define CY8CKIT_028_EPD_PIN_THERM_VDD           (CYBSP_A0)
 /** Pin for the Thermistor Output option1 signal */
@@ -74,7 +74,7 @@ extern "C"
 /** Pin for the Thermistor Ground signal */
 #define CY8CKIT_028_EPD_PIN_THERM_GND           (CYBSP_A3)
 
-/* Internal measurement unit (IMU) : accelerometer + gyroscope */
+// Internal measurement unit (IMU) : accelerometer + gyroscope
 /** Pin for the Accelerometer & Gyroscope I2C SCL signal */
 #define CY8CKIT_028_EPD_PIN_IMU_I2C_SCL         (CYBSP_I2C_SCL)
 /** Pin for the Accelerometer & Gyroscope I2C SDA signal */
@@ -84,7 +84,7 @@ extern "C"
 /** Pin for the Accelerometer & Gyroscope Interrupt2 signal */
 #define CY8CKIT_028_EPD_PIN_IMU_INT_2           (CYBSP_D8)
 
-/* PDM Microphone */
+// PDM Microphone
 /** Pin for the PDM Clock */
 #define CY8CKIT_028_EPD_PIN_PDM_CLK             (CYBSP_A4)
 /** Pin for the PDM Data */
@@ -93,11 +93,11 @@ extern "C"
 /** \} group_board_libs_pins */
 
 /**
-* \addtogroup group_board_libs_shield
-* \{
-*/
+ * \addtogroup group_board_libs_shield
+ * \{
+ */
 
-/* Thermistor Constants */
+// Thermistor Constants
 /** Resistance of the reference resistor */
 #define CY8CKIT_028_EPD_THERM_R_REF             (float)(10000)
 /** Beta constant of the (NCP18XH103F03RB) thermistor (3380 Kelvin).See the
@@ -113,4 +113,3 @@ extern "C"
 #if defined(__cplusplus)
 }
 #endif
-

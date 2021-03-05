@@ -12,6 +12,8 @@ This library includes support for each of the hardware components included on th
 * PDM Microphone example code (SPK0838HT4HB)
 
 ### What Changed?
+#### v2.0.0
+* thermistor library updated to 2.0.0.
 #### v1.0.0
 * Initial release supporting the E-Ink display, motion sensor, and thermistor
 
@@ -20,10 +22,12 @@ This version of the CY8CKIT-028-EPD library was validated for compatibility with
 
 | Software and Tools                        | Version |
 | :---                                      | :----:  |
-| ModusToolbox Software Environment         | 2.0     |
-| GCC Compiler                              | 7.4     |
-| IAR Compiler                              | 8.32    |
+| ModusToolbox Software Environment         | 2.2     |
+| GCC Compiler                              | 9.3     |
+| IAR Compiler                              | 8.4     |
 | ARM Compiler 6                            | 6.11    |
+
+Minimum required ModusToolbox Software Environment: v2.0
 
 ### More information
 
@@ -35,4 +39,4 @@ This version of the CY8CKIT-028-EPD library was validated for compatibility with
 * [ModusToolbox](https://www.cypress.com/products/modustoolbox-software-environment)
 
 ---
-© Cypress Semiconductor Corporation, 2019-2020.
+© Cypress Semiconductor Corporation, 2019-2021.
