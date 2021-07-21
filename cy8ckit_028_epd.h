@@ -93,7 +93,7 @@ extern "C"
  * @return CY_RSLT_SUCCESS if properly initialized, else an error indicating what went wrong.
  */
 cy_rslt_t cy8ckit_028_epd_init(cyhal_i2c_t* i2c_inst, cyhal_spi_t* spi_inst, cyhal_adc_t* adc_inst,
-                               cyhal_pdm_pcm_cfg_t* pdm_pcm_cfg,
+                               const cyhal_pdm_pcm_cfg_t* pdm_pcm_cfg,
                                cyhal_clock_t* audio_clock_inst);
 // For more information about the pdm_pcm_cfg and audio_clock_inst parameters,
 // see ../common/microphone_spk0838ht4hb.h
@@ -136,7 +136,8 @@ uint8_t* cy8ckit_028_epd_get_previous_frame(void);
 uint8_t* cy8ckit_028_epd_get_current_frame(void);
 
 /**
- * Gives the user access to the PDM object used with the microphone
+ * Gives the user access to the PDM object used with the microphone.
+ * This will be null if the arguments to setup the PDM interface were not provided.
  * @return A reference to the PDM microphone object on this shield.
  */
 cyhal_pdm_pcm_t* cy8ckit_028_epd_get_pdm(void);

@@ -52,10 +52,15 @@ static mtb_thermistor_ntc_gpio_cfg_t thermistor_cfg =
     .r_infinity = CY8CKIT_028_EPD_THERM_R_INFINITY,
 };
 
+#define INITIALIZED_DISPLAY     (0x01)
+#define INITIALIZED_MOTION      (0x02)
+#define INITIALIZED_THERMISTOR  (0x04)
+#define INITIALIZED_MIC         (0x08)
+
 static cyhal_i2c_t* i2c_ptr;
 static cyhal_spi_t* spi_ptr;
 static cyhal_adc_t* adc_ptr;
-static bool         microphone_initialized = false;
+static uint8_t      initialized = 0;
 
 const mtb_e2271cs021_pins_t EINK_PINS =
 {
@@ -75,7 +80,7 @@ const mtb_e2271cs021_pins_t EINK_PINS =
 // cy8ckit_028_epd_init
 //--------------------------------------------------------------------------------------------------
 cy_rslt_t cy8ckit_028_epd_init(cyhal_i2c_t* i2c_inst, cyhal_spi_t* spi_inst, cyhal_adc_t* adc_inst,
-                               cyhal_pdm_pcm_cfg_t* pdm_pcm_cfg,
+                               const cyhal_pdm_pcm_cfg_t* pdm_pcm_cfg,
                                cyhal_clock_t* audio_clock_inst)
 {
     cy_rslt_t result = CY_RSLT_SUCCESS;
@@ -101,7 +106,7 @@ cy_rslt_t cy8ckit_028_epd_init(cyhal_i2c_t* i2c_inst, cyhal_spi_t* spi_inst, cyh
         i2c_ptr = i2c_inst;
     }
 
-    if (NULL == spi_inst)
+    if ((CY_RSLT_SUCCESS == result) && (NULL == spi_inst))
     {
         result = cyhal_spi_init(&spi, CY8CKIT_028_EPD_PIN_DISPLAY_SPI_MOSI,
                                 CY8CKIT_028_EPD_PIN_DISPLAY_SPI_MISO,
@@ -118,7 +123,7 @@ cy_rslt_t cy8ckit_028_epd_init(cyhal_i2c_t* i2c_inst, cyhal_spi_t* spi_inst, cyh
         spi_ptr = spi_inst;
     }
 
-    if (NULL == adc_inst)
+    if ((CY_RSLT_SUCCESS == result) && (NULL == adc_inst))
     {
         result = cyhal_adc_init(&adc, CY8CKIT_028_EPD_PIN_THERM_OUT1, NULL);
         if (CY_RSLT_SUCCESS == result)
@@ -137,6 +142,7 @@ cy_rslt_t cy8ckit_028_epd_init(cyhal_i2c_t* i2c_inst, cyhal_spi_t* spi_inst, cyh
     }
     if (CY_RSLT_SUCCESS == result)
     {
+        initialized |= INITIALIZED_MOTION;
         result = mtb_thermistor_ntc_gpio_init(&thermistor, adc_ptr, CY8CKIT_028_EPD_PIN_THERM_GND,
                                               CY8CKIT_028_EPD_PIN_THERM_VDD,
                                               CY8CKIT_028_EPD_PIN_THERM_OUT1,
@@ -145,6 +151,7 @@ cy_rslt_t cy8ckit_028_epd_init(cyhal_i2c_t* i2c_inst, cyhal_spi_t* spi_inst, cyh
     }
     if (CY_RSLT_SUCCESS == result)
     {
+        initialized |= INITIALIZED_THERMISTOR;
         #ifdef EMWIN_ENABLED
         current_frame = (uint8_t*)LCD_GetDisplayBuffer();
         #endif
@@ -152,13 +159,20 @@ cy_rslt_t cy8ckit_028_epd_init(cyhal_i2c_t* i2c_inst, cyhal_spi_t* spi_inst, cyh
     }
 
     // Initialize the PDM/PCM block
-    if ((CY_RSLT_SUCCESS == result) && (NULL != audio_clock_inst) && (NULL != pdm_pcm_cfg))
+    if (CY_RSLT_SUCCESS == result)
     {
-        microphone_initialized = true;
-        result                 = cyhal_pdm_pcm_init(&cy8ckit_028_epd_pdm_pcm,
-                                                    CY8CKIT_028_EPD_PIN_PDM_DATA,
-                                                    CY8CKIT_028_EPD_PIN_PDM_CLK, audio_clock_inst,
-                                                    pdm_pcm_cfg);
+        initialized |= INITIALIZED_DISPLAY;
+
+        if ((NULL != audio_clock_inst) && (NULL != pdm_pcm_cfg))
+        {
+            result = cyhal_pdm_pcm_init(&cy8ckit_028_epd_pdm_pcm, CY8CKIT_028_EPD_PIN_PDM_DATA,
+                                        CY8CKIT_028_EPD_PIN_PDM_CLK, audio_clock_inst, pdm_pcm_cfg);
+
+            if (CY_RSLT_SUCCESS == result)
+            {
+                initialized |= INITIALIZED_MIC;
+            }
+        }
     }
 
     if (CY_RSLT_SUCCESS != result)
@@ -220,7 +234,9 @@ uint8_t* cy8ckit_028_epd_get_current_frame(void)
 //--------------------------------------------------------------------------------------------------
 cyhal_pdm_pcm_t* cy8ckit_028_epd_get_pdm(void)
 {
-    return &cy8ckit_028_epd_pdm_pcm;
+    return (initialized & INITIALIZED_MIC)
+        ? &cy8ckit_028_epd_pdm_pcm
+        : NULL;
 }
 
 
@@ -229,8 +245,23 @@ cyhal_pdm_pcm_t* cy8ckit_028_epd_get_pdm(void)
 //--------------------------------------------------------------------------------------------------
 void cy8ckit_028_epd_free(void)
 {
-    mtb_e2271cs021_free();
-    mtb_bmi160_free(&motion_sensor);
+    if (initialized & INITIALIZED_DISPLAY)
+    {
+        mtb_e2271cs021_free();
+    }
+    if (initialized & INITIALIZED_MOTION)
+    {
+        mtb_bmi160_free(&motion_sensor);
+    }
+    if (initialized & INITIALIZED_THERMISTOR)
+    {
+        mtb_thermistor_ntc_gpio_free(&thermistor);
+    }
+    if (initialized & INITIALIZED_MIC)
+    {
+        cyhal_pdm_pcm_free(&cy8ckit_028_epd_pdm_pcm);
+    }
+    initialized = 0;
 
     if (i2c_ptr == &i2c)
     {
@@ -238,13 +269,11 @@ void cy8ckit_028_epd_free(void)
     }
     i2c_ptr = NULL;
 
-    mtb_thermistor_ntc_gpio_free(&thermistor);
-
-    if (microphone_initialized)
+    if (spi_ptr == &spi)
     {
-        microphone_initialized = false;
-        cyhal_pdm_pcm_free(&cy8ckit_028_epd_pdm_pcm);
+        cyhal_spi_free(spi_ptr);
     }
+    spi_ptr = NULL;
 
     // This must be done last, in case other code prior to this frees an ADC channel
     if (adc_ptr == &adc)

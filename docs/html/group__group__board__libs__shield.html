@@ -113,9 +113,9 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga0302881fb9347aa07ade1dd4d5b8c02d"><td class="memItemLeft" align="right" valign="top">cy_rslt_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__board__libs__shield.html#ga0302881fb9347aa07ade1dd4d5b8c02d">cy8ckit_028_epd_init</a> (cyhal_i2c_t *i2c_inst, cyhal_spi_t *spi_inst, cyhal_adc_t *adc_inst, cyhal_pdm_pcm_cfg_t *pdm_pcm_cfg, cyhal_clock_t *audio_clock_inst)</td></tr>
-<tr class="memdesc:ga0302881fb9347aa07ade1dd4d5b8c02d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the shield board and all peripherals contained on it.  <a href="#ga0302881fb9347aa07ade1dd4d5b8c02d">More...</a><br /></td></tr>
-<tr class="separator:ga0302881fb9347aa07ade1dd4d5b8c02d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa8e897a36fa9aae6b698d0494f9e063e"><td class="memItemLeft" align="right" valign="top">cy_rslt_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__board__libs__shield.html#gaa8e897a36fa9aae6b698d0494f9e063e">cy8ckit_028_epd_init</a> (cyhal_i2c_t *i2c_inst, cyhal_spi_t *spi_inst, cyhal_adc_t *adc_inst, const cyhal_pdm_pcm_cfg_t *pdm_pcm_cfg, cyhal_clock_t *audio_clock_inst)</td></tr>
+<tr class="memdesc:gaa8e897a36fa9aae6b698d0494f9e063e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the shield board and all peripherals contained on it.  <a href="#gaa8e897a36fa9aae6b698d0494f9e063e">More...</a><br /></td></tr>
+<tr class="separator:gaa8e897a36fa9aae6b698d0494f9e063e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae7124001298674f12cf4a6e3332d9414"><td class="memItemLeft" align="right" valign="top">mtb_thermistor_ntc_gpio_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__board__libs__shield.html#gae7124001298674f12cf4a6e3332d9414">cy8ckit_028_epd_get_thermistor</a> (void)</td></tr>
 <tr class="memdesc:gae7124001298674f12cf4a6e3332d9414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gives the user access to the thermistor object.  <a href="#gae7124001298674f12cf4a6e3332d9414">More...</a><br /></td></tr>
 <tr class="separator:gae7124001298674f12cf4a6e3332d9414"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,7 +136,7 @@ Functions</h2></td></tr>
 <tr class="separator:ga53feb0188da8be2593c02b677450fd42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga045b4e97ca404ff21654051209b92177"><td class="memItemLeft" align="right" valign="top"><a id="ga045b4e97ca404ff21654051209b92177"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group__board__libs__shield.html#ga045b4e97ca404ff21654051209b92177">cy8ckit_028_epd_free</a> (void)</td></tr>
-<tr class="memdesc:ga045b4e97ca404ff21654051209b92177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees up any resources allocated as part of <a class="el" href="group__group__board__libs__shield.html#ga0302881fb9347aa07ade1dd4d5b8c02d">cy8ckit_028_epd_init()</a>. <br /></td></tr>
+<tr class="memdesc:ga045b4e97ca404ff21654051209b92177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees up any resources allocated as part of <a class="el" href="group__group__board__libs__shield.html#gaa8e897a36fa9aae6b698d0494f9e063e">cy8ckit_028_epd_init()</a>. <br /></td></tr>
 <tr class="separator:ga045b4e97ca404ff21654051209b92177"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -157,8 +157,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga0302881fb9347aa07ade1dd4d5b8c02d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0302881fb9347aa07ade1dd4d5b8c02d">&#9670;&nbsp;</a></span>cy8ckit_028_epd_init()</h2>
+<a id="gaa8e897a36fa9aae6b698d0494f9e063e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa8e897a36fa9aae6b698d0494f9e063e">&#9670;&nbsp;</a></span>cy8ckit_028_epd_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,7 +184,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">cyhal_pdm_pcm_cfg_t *&#160;</td>
+          <td class="paramtype">const cyhal_pdm_pcm_cfg_t *&#160;</td>
           <td class="paramname"><em>pdm_pcm_cfg</em>, </td>
         </tr>
         <tr>
@@ -338,7 +338,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="grou
 </div><div class="memdoc">
 
 <p>Gives the user access to the PDM object used with the microphone. </p>
-<dl class="section return"><dt>Returns</dt><dd>A reference to the PDM microphone object on this shield. </dd></dl>
+<p>This will be null if the arguments to setup the PDM interface were not provided. </p><dl class="section return"><dt>Returns</dt><dd>A reference to the PDM microphone object on this shield. </dd></dl>
 
 </div>
 </div>
