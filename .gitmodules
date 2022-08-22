@@ -1,0 +1,3 @@
+[submodule "libs/display-eink-e2271cs021-arduino"]
+	path = libs/display-eink-e2271cs021-arduino
+	url = git@github.com:bulislaw/display-eink-e2271cs021-arduino.git
